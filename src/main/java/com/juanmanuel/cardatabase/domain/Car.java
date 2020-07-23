@@ -3,6 +3,7 @@ package com.juanmanuel.cardatabase.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -21,8 +22,21 @@ public class Car {
     private int year;
     private int price;
 
+    // Define relacion muchos a uno. La estrategía FetchType.LAZY,
+    // significa que cuando el propietario recupera los datos de la base de datos,
+    // todos los automoviles asociados con el propietario se recuperarán cuando sea necesario.
+    // La estrategía FetchType.EAGER, significa ansioso,
+    // consiste que los autos serán traídos inmediatamente con el propietario.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner")
+    private Owner owner;
+
+    // Como hacer una relación ManyToMany
+    @ManyToMany(mappedBy = "carsManyMany")
+    private Set<Owner> owners;
+
     public Car(String brand, String model, String color,
-               String registerNumber, int year, int price){
+               String registerNumber, int year, int price, Owner owner){
         super();
         this.brand = brand;
         this.model = model;
@@ -30,6 +44,7 @@ public class Car {
         this.registerNumber = registerNumber;
         this.year = year;
         this.price = price;
+        this.owner = owner;
     }
 
 
