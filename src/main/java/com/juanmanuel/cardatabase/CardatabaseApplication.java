@@ -1,9 +1,6 @@
 package com.juanmanuel.cardatabase;
 
-import com.juanmanuel.cardatabase.domain.Car;
-import com.juanmanuel.cardatabase.domain.CarRepository;
-import com.juanmanuel.cardatabase.domain.Owner;
-import com.juanmanuel.cardatabase.domain.OwnerRepository;
+import com.juanmanuel.cardatabase.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +14,8 @@ public class CardatabaseApplication {
 	private CarRepository carRepository;
 	@Autowired
 	private OwnerRepository ownerRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CardatabaseApplication.class, args);
@@ -64,6 +63,11 @@ public class CardatabaseApplication {
 							.owner(owner2)
 							.build()
 			);
+
+			// username: user #### password: user
+			userRepository.save(new User("user", "$2a$04$1.YhMIgNX/8TkCKGFUONWO1waedKhQ5KrnB30fl0Q01QKqmzLf.Zi", "USER"));
+			// username: admin #### password: admin
+			userRepository.save(new User("admin", "$2a$04$KNLUwOWHVQZVpXyMBNc7JOzbLiBjb9Tk9bP7KNcPI12ICuvzXQQKG", "ADMIN"));
 		};
 	}
 
