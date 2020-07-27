@@ -1,5 +1,7 @@
 package com.juanmanuel.cardatabase.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity // Esta es la tabla SQL
+// Ignora las propiedades lógicas especificadas en la serialización y deserialización JSON. Está anotado a nivel de clase
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Owner {
 
     @Id
@@ -27,6 +31,8 @@ public class Owner {
     // El mappedBy="owner", nos dice que el CAR class tiene un campo de propietario,
     // que a su vez esa es su foreign key de la relación
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    // se utiliza para ignorar la propiedad lógica utilizada en la serialización y deserialización.
+    @JsonIgnore
     private List<Car> cars;
 
     // Como hacer una relación ManyToMany
