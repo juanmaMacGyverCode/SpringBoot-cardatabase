@@ -37,6 +37,18 @@ public class Car {
     private Set<Owner> owners;
 
     public Car(String brand, String model, String color,
+               String registerNumber, int year, int price){
+        super();
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.registerNumber = registerNumber;
+        this.year = year;
+        this.price = price;
+        this.owner = owner;
+    }
+
+    public Car(String brand, String model, String color,
                String registerNumber, int year, int price, Owner owner){
         super();
         this.brand = brand;
